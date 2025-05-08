@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Household Item Prices Over Time</title>
+    <link rel="stylesheet" href="/src/styles/main.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-zoom"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Household Item Prices Over Time</h1>
+        
+        <div class="filters-container">
+            <div class="filter-group">
+                <label for="president-select">By President:</label>
+                <select id="president-select" multiple size="4">
+                    <!-- Presidents will be populated dynamically -->
+                </select>
+                <div class="filter-actions">
+                    <button id="select-all-presidents">Select All</button>
+                    <button id="clear-presidents">Clear</button>
+                </div>
+            </div>
+            <div class="filter-group">
+                <label for="item-search">Search Items:</label>
+                <input type="text" id="item-search" placeholder="Search for items...">
+            </div>
+            
+            <div class="filter-group">
+                <label for="item-select">Select Items:</label>
+                <select id="item-select" multiple size="5">
+                    <!-- Items will be populated dynamically -->
+                </select>
+                <div class="filter-actions">
+                    <button id="select-all">Select All</button>
+                    <button id="clear-selection">Clear</button>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <label>Year Range:</label>
+                <div class="year-range">
+                    <div>
+                        <label for="year-start">From:</label>
+                        <input type="number" id="year-start" min="1900" max="2100">
+                    </div>
+                    <div>
+                        <label for="year-end">To:</label>
+                        <input type="number" id="year-end" min="1900" max="2100">
+                    </div>
+                </div>
+            </div>
+            
+            <div class="filter-group">
+                <label>
+                    <input type="checkbox" id="adjust-inflation">
+                    Adjust for Inflation
+                </label>
+            </div>
+            
+            <div class="filter-actions">
+                <button id="apply-filters">Apply Filters</button>
+                <button id="reset-filters">Reset</button>
+            </div>
+        </div>
+        
+        <figure>
+            <canvas id="priceChart"></canvas>
+            <figcaption>Interactive chart showing household item prices over time with presidential terms highlighted</figcaption>
+        </figure>
+    </div>
+    
+    <script type="module" src="/src/main.js"></script>
+</body>
+</html> 

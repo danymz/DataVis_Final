@@ -1,0 +1,21 @@
+{
+  "name": "household-prices-visualization",
+  "version": "1.0.0",
+  "description": "Interactive visualization of household item prices over time with presidential annotations",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "chart.js": "^4.4.1",
+    "chartjs-plugin-annotation": "^3.0.0",
+    "chartjs-plugin-zoom": "^2.0.1",
+    "papaparse": "^5.4.1",
+    "xlsx": "^0.18.5"
+  },
+  "devDependencies": {
+    "vite": "^5.0.12"
+  }
+}
