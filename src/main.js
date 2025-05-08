@@ -5,19 +5,20 @@ import { getCPI, getLatestCPI } from './data/cpi.js';
 
 // Define presidency data
 const presidencies = [
-    { name: 'Eisenhower', start: 1953, end: 1961 },
-    { name: 'Kennedy', start: 1961, end: 1963 },
-    { name: 'Johnson', start: 1963, end: 1969 },
-    { name: 'Nixon', start: 1969, end: 1974 },
-    { name: 'Ford', start: 1974, end: 1977 },
-    { name: 'Carter', start: 1977, end: 1981 },
-    { name: 'Reagan', start: 1981, end: 1989 },
-    { name: 'Bush', start: 1989, end: 1993 },
-    { name: 'Clinton', start: 1993, end: 2001 },
-    { name: 'Bush', start: 2001, end: 2009 },
-    { name: 'Obama', start: 2009, end: 2017 },
-    { name: 'Trump', start: 2017, end: 2021 },
-    { name: 'Biden', start: 2021, end: 2024 }
+    { name: 'Dwight D. Eisenhower', start: 1953, end: 1961 },
+    { name: 'John F. Kennedy', start: 1961, end: 1963 },
+    { name: 'Lyndon B. Johnson', start: 1963, end: 1969 },
+    { name: 'Richard Nixon', start: 1969, end: 1974 },
+    { name: 'Gerald Ford', start: 1974, end: 1977 },
+    { name: 'Jimmy Carter', start: 1977, end: 1981 },
+    { name: 'Ronald Reagan', start: 1981, end: 1989 },
+    { name: 'George H. W. Bush', start: 1989, end: 1993 },
+    { name: 'Bill Clinton', start: 1993, end: 2001 },
+    { name: 'George W. Bush', start: 2001, end: 2009 },
+    { name: 'Barack Obama', start: 2009, end: 2017 },
+    { name: 'Donald Trump', start: 2017, end: 2021 },
+    { name: 'Joe Biden', start: 2021, end: 2024 },
+    { name: 'Donald Trump', start: 2025, end: 2029 }
 ];
 
 // List of Excel files to process
@@ -41,13 +42,13 @@ const excelFiles = [
     '/data/Strawberries.xlsx',
     '/data/Sugar.xlsx',
     '/data/Flour.xlsx',
-    '/data/Spaghetti_Cost_Per_Pound_453.6_Grams_In_U.S._City_Average.xlsx',
+    '/data/Spaghetti.xlsx',
     '/data/All_Soft_Drinks.xlsx',
     '/data/Cola.xlsx',
     '/data/Wine.xlsx',
     '/data/Vodka.xlsx',
     '/data/Gasoline.xlsx',
-    '/data/Electricity_Per_Kwh_In_U.S._City_Average.xlsx',
+    '/data/Electricity.xlsx',
     '/data/Tuna.xlsx',
     '/data/Yogurt.xlsx',
     '/data/Rolls.xlsx'

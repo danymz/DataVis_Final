@@ -3,25 +3,15 @@ import annotationPlugin from 'chartjs-plugin-annotation';
 import zoomPlugin from 'chartjs-plugin-zoom';
 import { parseExcelData, createPresidencyAnnotations } from '../utils/excelParser.js';
 
-// Register Chart.js components
 Chart.register(...registerables, annotationPlugin, zoomPlugin);
 
-/**
- * Initialize the price chart
- * @param {Array} data - Array of data points
- * @param {Array} presidencies - Array of presidency objects
- * @returns {Chart} Chart.js instance
- */
 export function initChart(data, presidencies) {
     const ctx = document.getElementById('priceChart').getContext('2d');
-    
-    // Process data for Chart.js
+
     const { years, datasets } = parseExcelData(data, presidencies);
     
-    // Create presidency annotations
     const annotations = createPresidencyAnnotations(presidencies);
-    
-    // Create chart
+
     const chart = new Chart(ctx, {
         type: 'line',
         data: {
@@ -31,6 +21,15 @@ export function initChart(data, presidencies) {
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            layout: {
+                padding: {
+                    bottom: 50
+                }
+            },
+            interaction: {
+                mode: 'index',
+                intersect: false
+            },
             plugins: {
                 title: {
                     display: true,
@@ -58,11 +57,21 @@ export function initChart(data, presidencies) {
                             }
                             return label;
                         }
-                    }
+                    },
+                    enabled: true
                 },
                 legend: {
-                    position: 'right',
-                    align: 'start'
+                    position: 'bottom',
+                    align: 'center',
+                    labels: {
+                        boxWidth: 12,
+                        font: {
+                            size: 11
+                        },
+                        color: '#333',
+                        padding: 5,
+                        usePointStyle: true
+                    }
                 },
                 zoom: {
                     pan: {
@@ -120,19 +129,11 @@ export function initChart(data, presidencies) {
     return chart;
 }
 
-/**
- * Update the chart with new data
- * @param {Chart} chart - Chart.js instance
- * @param {Array} data - Array of data points
- */
 export function updateChart(chart, data) {
-    // Process data for Chart.js
     const { years, datasets } = parseExcelData(data, chart.options.plugins.annotation.annotations);
     
-    // Update chart data
     chart.data.labels = years;
     chart.data.datasets = datasets;
     
-    // Update chart
     chart.update();
 } 

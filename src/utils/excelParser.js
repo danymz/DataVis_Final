@@ -1,20 +1,13 @@
 import * as XLSX from 'xlsx';
 
-/**
- * Reads an Excel file and returns its data
- * @param {string} filePath - Path to the Excel file
- * @returns {Array} Array of objects with the Excel data
- */
 export async function readExcelFile(filePath) {
   try {
     const response = await fetch(filePath);
     const arrayBuffer = await response.arrayBuffer();
     const workbook = XLSX.read(arrayBuffer, { type: 'array' });
-    
-    // Log sheet names
+ 
     console.log(`Sheet names in ${filePath}:`, workbook.SheetNames);
     
-    // Get the "data" sheet instead of the first sheet
     let worksheet;
     if (workbook.SheetNames.includes('data')) {
       worksheet = workbook.Sheets['data'];
@@ -23,19 +16,15 @@ export async function readExcelFile(filePath) {
       worksheet = workbook.Sheets['Data'];
       console.log(`Using 'Data' sheet from ${filePath}`);
     } else {
-      // Fall back to the first sheet if "data" sheet doesn't exist
       const firstSheetName = workbook.SheetNames[0];
       worksheet = workbook.Sheets[firstSheetName];
       console.warn(`No "data" sheet found in ${filePath}, using first sheet: ${firstSheetName}`);
     }
-    
-    // Convert to JSON
+  
     const data = XLSX.utils.sheet_to_json(worksheet);
     
-    // Log the first few rows to understand the structure
     console.log(`Data from ${filePath}:`, data.slice(0, 3));
     
-    // Log column names
     if (data.length > 0) {
       console.log(`Column names in ${filePath}:`, Object.keys(data[0]));
     }
@@ -47,24 +36,17 @@ export async function readExcelFile(filePath) {
   }
 }
 
-/**
- * Processes multiple Excel files and combines the data
- * @param {Array} filePaths - Array of paths to Excel files
- * @returns {Promise<Array>} Combined data from all Excel files
- */
+
 export async function processExcelFiles(filePaths) {
   const allData = [];
   
   for (const filePath of filePaths) {
     const data = await readExcelFile(filePath);
-    
-    // Extract item name from file path
+
     const fileName = filePath.split('/').pop();
     const itemName = fileName.split('.')[0].replace(/_/g, ' ');
     
-    // Process the data based on the structure
     const processedData = data.map(row => {
-      // Always use 'Year' and 'Average' columns (case-insensitive)
       let year = null;
       let average = null;
       for (const key of Object.keys(row)) {
@@ -80,7 +62,7 @@ export async function processExcelFiles(filePaths) {
         price: Number(average),
         item: itemName
       };
-    }).filter(item => item !== null); // Remove null items
+    }).filter(item => item !== null);
     
     allData.push(...processedData);
   }
@@ -89,12 +71,6 @@ export async function processExcelFiles(filePaths) {
   return allData;
 }
 
-/**
- * Determines the presidency for a given year
- * @param {number} year - The year to check
- * @param {Array} presidencies - Array of presidency objects
- * @returns {string} Name of the president for that year
- */
 export function getPresidencyForYear(year, presidencies) {
   for (const presidency of presidencies) {
     if (year >= presidency.start && year <= presidency.end) {
@@ -104,11 +80,6 @@ export function getPresidencyForYear(year, presidencies) {
   return 'Unknown';
 }
 
-/**
- * Creates presidency annotations for the chart
- * @param {Array} presidencies - Array of presidency objects
- * @returns {Array} Array of annotation objects for Chart.js
- */
 export function createPresidencyAnnotations(presidencies) {
   const colors = ['rgba(200,200,200,0.1)', 'rgba(200,200,200,0.15)'];
   
@@ -130,12 +101,6 @@ export function createPresidencyAnnotations(presidencies) {
   }));
 }
 
-/**
- * Processes raw data from Excel files into a format suitable for Chart.js
- * @param {Array} rawData - Array of objects from Excel parsing
- * @param {Array} presidencies - Array of presidency objects
- * @returns {Object} Processed data with years and datasets
- */
 export function parseExcelData(rawData, presidencies) {
   // Extract unique years and sort them
   const years = [...new Set(rawData.map(d => d.year))].sort((a, b) => a - b);
@@ -169,8 +134,7 @@ export function parseExcelData(rawData, presidencies) {
     '#9e9e9e', // grey
     '#ff4081'  // accent pink
   ];
-  
-  // Build datasets array for Chart.js
+ 
   const datasets = items.map((item, idx) => ({
     label: item,
     data: years.map(year => {

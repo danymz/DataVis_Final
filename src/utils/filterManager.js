@@ -1,17 +1,4 @@
-/**
- * Filter manager for the price visualization
- * Handles filtering data based on user selections
- */
 
-/**
- * Filter data based on selected items, date range, and president(s)
- * @param {Array} data - The raw data array
- * @param {Object} filters - Filter options
- * @param {Array} filters.selectedItems - Array of selected item names
- * @param {Object} filters.dateRange - Date range object with start and end years
- * @param {Array} filters.selectedPresidencies - Array of selected president names
- * @returns {Array} Filtered data array
- */
 export function filterData(data, filters) {
   if (!data || !Array.isArray(data)) {
     console.error('Invalid data provided to filterData');
@@ -55,11 +42,6 @@ export function filterData(data, filters) {
   });
 }
 
-/**
- * Get unique items from the data
- * @param {Array} data - The raw data array
- * @returns {Array} Array of unique item names
- */
 export function getUniqueItems(data) {
   if (!data || !Array.isArray(data)) {
     return [];
@@ -68,11 +50,6 @@ export function getUniqueItems(data) {
   return [...new Set(data.map(item => item.item))].sort();
 }
 
-/**
- * Get unique presidencies from the data
- * @param {Array} data - The raw data array
- * @returns {Array} Array of unique presidency names
- */
 export function getUniquePresidencies(data) {
   if (!data || !Array.isArray(data)) {
     return [];
@@ -80,11 +57,6 @@ export function getUniquePresidencies(data) {
   return [...new Set(data.map(item => item.presidency))].sort();
 }
 
-/**
- * Get the min and max years from the data
- * @param {Array} data - The raw data array
- * @returns {Object} Object with min and max years
- */
 export function getYearRange(data) {
   if (!data || !Array.isArray(data) || data.length === 0) {
     return { min: 0, max: 0 };
@@ -97,12 +69,6 @@ export function getYearRange(data) {
   };
 }
 
-/**
- * Search for items by name
- * @param {Array} items - Array of item names
- * @param {string} searchTerm - Search term
- * @returns {Array} Filtered array of item names
- */
 export function searchItems(items, searchTerm) {
   if (!searchTerm || searchTerm.trim() === '') {
     return items;

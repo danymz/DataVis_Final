@@ -1,4 +1,4 @@
-// US CPI (Consumer Price Index) by year (example values, you can expand as needed)
+// US CPI (Consumer Price Index) by year
 export const CPI_DATA = {
   1950: 24.1, 1951: 26.0, 1952: 26.5, 1953: 26.7, 1954: 26.9, 1955: 26.8, 1956: 27.2, 1957: 28.1, 1958: 28.9, 1959: 29.1,
   1960: 29.6, 1961: 29.9, 1962: 30.2, 1963: 30.6, 1964: 31.0, 1965: 31.5, 1966: 32.4, 1967: 33.4, 1968: 34.8, 1969: 36.7,
